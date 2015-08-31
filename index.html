@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body ng-init="image = 'http://upload.wikimedia.org/wikipedia/commons/a/aa/Logo_Google_2013_Official.svg';">
+	<div style="height: 180px; width: 840px; border: 1px solid red;" my-background-image="image">
+	</div>
+	<h1>Hello World</h1>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+	<script>
+		var module = angular.
+		module('MyApp', []);
+
+		module.directive('myBackgroundImage', function(){
+			return function(scope, element, attributes) {
+				scope.$watch(attributes.myBackgroundImage, function(newVal, oldVal){
+					element.css('background-image', 'url(' + newVal + ')');					
+				})
+			};
+		});
+
+		module.directive('ng-SwipeLeft', function(){
+			return function(scope, element, attributes){
+				Hammer(element).on('swipeleft', function(){
+					scope.$eval(attributes.ngSwipeleft);
+					scope.$apply();
+				});
+			};
+		});
+
+		module.directive('ngSwipeRight', function(){
+			return function(scope, element, attributes){
+				Hammer(element).on('swiperight', function(){
+					scope.$eval(attributes.ngSwipeRight);
+
+				});
+			};
+		});
+	</script>
+</body>
+</html>
